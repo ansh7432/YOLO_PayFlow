@@ -20,7 +20,7 @@ interface Props {
 
 export default function LoginScreen({ onLogin }: Props) {
   const [username, setUsername] = useState('admin');
-  const [password, setPassword] = useState('admin123');
+  const [password, setPassword] = useState('123456');
   const [loading, setLoading] = useState(false);
 
   const handleLogin = async () => {
@@ -97,7 +97,7 @@ export default function LoginScreen({ onLogin }: Props) {
           <View style={styles.demoCredentials}>
             <Text style={styles.demoText}>Demo Credentials:</Text>
             <Text style={styles.demoText}>Username: admin</Text>
-            <Text style={styles.demoText}>Password: admin123</Text>
+            <Text style={styles.demoText}>Password: 123456</Text>
           </View>
         </View>
       </KeyboardAvoidingView>

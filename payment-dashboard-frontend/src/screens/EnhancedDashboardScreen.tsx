@@ -416,41 +416,6 @@ export default function EnhancedDashboardScreen({ navigation }: any) {
           </Animatable.View>
         )}
 
-        {/* Quick Actions */}
-        <Animatable.View 
-          animation="fadeInUp" 
-          duration={800}
-          delay={700}
-          style={styles.actionsContainer}
-        >
-          <Text style={styles.sectionTitle}>Quick Actions</Text>
-          <View style={styles.actionButtons}>
-            <GradientButton
-              title="💳 Add Payment"
-              onPress={() => navigation.navigate('AddPayment')}
-              variant="primary"
-              size="medium"
-              style={styles.actionButton}
-            />
-            <GradientButton
-              title="📋 View Transactions"
-              onPress={() => navigation.navigate('Transactions')}
-              variant="secondary"
-              size="medium"
-              style={styles.actionButton}
-            />
-            {user?.role === 'admin' && (
-              <GradientButton
-                title="👥 Manage Users"
-                onPress={() => navigation.navigate('Users')}
-                variant="success"
-                size="medium"
-                style={styles.actionButton}
-              />
-            )}
-          </View>
-        </Animatable.View>
-
         {/* Footer */}
         <Animatable.View 
           animation="fadeIn" 

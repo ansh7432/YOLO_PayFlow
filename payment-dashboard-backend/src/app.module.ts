@@ -10,7 +10,7 @@ import { UsersModule } from './users/users.module';
     ConfigModule.forRoot({
       isGlobal: true,
     }),
-    MongooseModule.forRoot(process.env.DATABASE_URL || 'mongodb://localhost:27017/payment-dashboard'),
+    MongooseModule.forRoot(process.env.DATABASE_URL || 'mongodb+srv://flowpay:Anshsoni%40123@cluster0.uv1uysn.mongodb.net/payment-dashboard?retryWrites=true&w=majority&appName=Cluster0'),
     AuthModule,
     PaymentsModule,
     UsersModule,

@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
   },
   statsTitle: {
     fontSize: 14,
-    color: theme.colors.text.secondary,
+    color: '#fff', // Make heading text white for all stats cards
     marginBottom: 4,
     fontWeight: '500',
   },
@@ -158,11 +158,11 @@ const styles = StyleSheet.create({
   statsValue: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: theme.colors.text.primary,
+    color: '#fff', // Make all stat values white
     marginBottom: 2,
   },
   statsValueWhite: {
-    color: theme.colors.text.inverse,
+    color: '#fff', // Ensure white for all variants
   },
   statsSubtitle: {
     fontSize: 12,

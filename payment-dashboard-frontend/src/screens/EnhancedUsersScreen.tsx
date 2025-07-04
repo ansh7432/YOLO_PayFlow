@@ -27,7 +27,6 @@ export default function EnhancedUsersScreen({ navigation }: { navigation?: any }
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
-  const [showAddUser, setShowAddUser] = useState(false);
   const [currentUser, setCurrentUser] = useState<any>(null);
   const [newUser, setNewUser] = useState({
     username: '',
@@ -68,7 +67,6 @@ export default function EnhancedUsersScreen({ navigation }: { navigation?: any }
     setAddingUser(true);
     try {
       await usersAPI.create(newUser);
-      setShowAddUser(false);
       setNewUser({
         username: '',
         email: '',
@@ -182,15 +180,7 @@ export default function EnhancedUsersScreen({ navigation }: { navigation?: any }
     <SafeAreaView style={styles.container}>
       <LinearGradient colors={theme.gradients.primary as any} style={styles.header}>
         <Animatable.View animation="fadeInDown" style={styles.headerContent}>
-          <Text style={styles.headerTitle}>Users Management</Text>
-          {currentUser?.role === 'admin' && (
-            <TouchableOpacity
-              style={styles.addButton}
-              onPress={() => setShowAddUser(true)}
-            >
-              <Icon name="add" size={24} color={theme.colors.text.inverse} />
-            </TouchableOpacity>
-          )}
+          <Text style={styles.headerTitle}>User Directory</Text>
         </Animatable.View>
         
         <Animatable.View animation="fadeInUp" delay={200} style={styles.statsContainer}>
@@ -256,108 +246,6 @@ export default function EnhancedUsersScreen({ navigation }: { navigation?: any }
           />
         )}
       </View>
-
-      {/* Add User Modal */}
-      <Modal
-        visible={showAddUser}
-        animationType="slide"
-        transparent={true}
-        onRequestClose={() => setShowAddUser(false)}
-      >
-        <View style={styles.modalOverlay}>
-          <Animatable.View animation="slideInUp" style={styles.modalContent}>
-            <LinearGradient colors={theme.gradients.primary as any} style={styles.modalHeader}>
-              <Text style={styles.modalTitle}>Add New User</Text>
-              <TouchableOpacity
-                style={styles.modalCloseButton}
-                onPress={() => setShowAddUser(false)}
-              >
-                <Icon name="close" size={24} color={theme.colors.text.inverse} />
-              </TouchableOpacity>
-            </LinearGradient>
-
-            <View style={styles.modalBody}>
-              <View style={styles.formGroup}>
-                <Text style={styles.label}>Username</Text>
-                <EnhancedInput
-                  placeholder="Enter username"
-                  value={newUser.username}
-                  onChangeText={(text) => setNewUser({ ...newUser, username: text })}
-                  icon={<Icon name="person" size={20} color={theme.colors.text.secondary} />}
-                />
-              </View>
-
-              <View style={styles.formGroup}>
-                <Text style={styles.label}>Email</Text>
-                <EnhancedInput
-                  placeholder="Enter email"
-                  value={newUser.email}
-                  onChangeText={(text) => setNewUser({ ...newUser, email: text })}
-                  keyboardType="email-address"
-                  icon={<Icon name="email" size={20} color={theme.colors.text.secondary} />}
-                />
-              </View>
-
-              <View style={styles.formGroup}>
-                <Text style={styles.label}>Password</Text>
-                <EnhancedInput
-                  placeholder="Enter password"
-                  value={newUser.password}
-                  onChangeText={(text) => setNewUser({ ...newUser, password: text })}
-                  secureTextEntry
-                  icon={<Icon name="lock" size={20} color={theme.colors.text.secondary} />}
-                />
-              </View>
-
-              <View style={styles.formGroup}>
-                <Text style={styles.label}>Role</Text>
-                <View style={styles.roleSelector}>
-                  {roleOptions.map((option) => (
-                    <TouchableOpacity
-                      key={option.value}
-                      style={[
-                        styles.roleOption,
-                        newUser.role === option.value && styles.roleOptionSelected,
-                      ]}
-                      onPress={() => setNewUser({ ...newUser, role: option.value as any })}
-                    >
-                      <LinearGradient
-                        colors={[option.color, option.color]}
-                        style={styles.roleOptionIcon}
-                      >
-                        <Icon name={option.icon} size={16} color={theme.colors.text.inverse} />
-                      </LinearGradient>
-                      <Text
-                        style={[
-                          styles.roleOptionText,
-                          newUser.role === option.value && styles.roleOptionTextSelected,
-                        ]}
-                      >
-                        {option.label}
-                      </Text>
-                    </TouchableOpacity>
-                  ))}
-                </View>
-              </View>
-
-              <View style={styles.modalActions}>
-                <GradientButton
-                  title="Cancel"
-                  onPress={() => setShowAddUser(false)}
-                  style={styles.cancelButton}
-                  colors={theme.gradients.secondary}
-                />
-                <GradientButton
-                  title={addingUser ? 'Creating...' : 'Create User'}
-                  onPress={handleAddUser}
-                  disabled={addingUser}
-                  style={styles.createButton}
-                />
-              </View>
-            </View>
-          </Animatable.View>
-        </View>
-      </Modal>
     </SafeAreaView>
   );
 }
@@ -385,11 +273,6 @@ const styles = StyleSheet.create({
     fontWeight: theme.typography.h2.fontWeight as any,
     color: theme.colors.text.inverse,
     flex: 1,
-  },
-  addButton: {
-    padding: theme.spacing.sm,
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-    borderRadius: theme.borderRadius.md,
   },
   statsContainer: {
     flexDirection: 'row',
@@ -531,92 +414,5 @@ const styles = StyleSheet.create({
     fontSize: theme.typography.body.fontSize,
     color: theme.colors.text.secondary,
     textAlign: 'center',
-  },
-  modalOverlay: {
-    flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    justifyContent: 'flex-end',
-  },
-  modalContent: {
-    backgroundColor: theme.colors.background,
-    borderTopLeftRadius: theme.borderRadius.xl,
-    borderTopRightRadius: theme.borderRadius.xl,
-    maxHeight: '80%',
-  },
-  modalHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: theme.spacing.lg,
-    borderTopLeftRadius: theme.borderRadius.xl,
-    borderTopRightRadius: theme.borderRadius.xl,
-  },
-  modalTitle: {
-    fontSize: theme.typography.h3.fontSize,
-    fontWeight: theme.typography.h3.fontWeight as any,
-    color: theme.colors.text.inverse,
-    flex: 1,
-  },
-  modalCloseButton: {
-    padding: theme.spacing.sm,
-  },
-  modalBody: {
-    padding: theme.spacing.lg,
-  },
-  formGroup: {
-    marginBottom: theme.spacing.lg,
-  },
-  label: {
-    fontSize: theme.typography.body.fontSize,
-    fontWeight: '600',
-    color: theme.colors.text.primary,
-    marginBottom: theme.spacing.sm,
-  },
-  roleSelector: {
-    flexDirection: 'row',
-    gap: theme.spacing.md,
-  },
-  roleOption: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: theme.spacing.md,
-    paddingHorizontal: theme.spacing.md,
-    borderRadius: theme.borderRadius.md,
-    borderWidth: 1,
-    borderColor: theme.colors.border,
-    backgroundColor: theme.colors.surface,
-  },
-  roleOptionSelected: {
-    backgroundColor: theme.colors.primary.start + '10',
-    borderColor: theme.colors.primary.start,
-  },
-  roleOptionIcon: {
-    width: 24,
-    height: 24,
-    borderRadius: 12,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: theme.spacing.sm,
-  },
-  roleOptionText: {
-    fontSize: theme.typography.body.fontSize,
-    color: theme.colors.text.primary,
-    fontWeight: '500',
-  },
-  roleOptionTextSelected: {
-    color: theme.colors.primary.start,
-    fontWeight: '600',
-  },
-  modalActions: {
-    flexDirection: 'row',
-    gap: theme.spacing.md,
-    marginTop: theme.spacing.xl,
-  },
-  cancelButton: {
-    flex: 1,
-  },
-  createButton: {
-    flex: 1,
   },
 });

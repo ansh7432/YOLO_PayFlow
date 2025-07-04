@@ -71,27 +71,17 @@ export default function EnhancedTransactionListScreen({ navigation }: Props) {
 
       const response = await paymentsAPI.getAll(params);
       console.log('💳 Transactions fetched:', response);
-      
-      // Handle both array response and object response
       let paymentsData: Payment[];
       let totalPagesData: number;
-      
       if (Array.isArray(response)) {
-        // API returns array directly
         paymentsData = response;
-        totalPagesData = 1; // Since it's all data in one page
+        totalPagesData = 1;
       } else {
-        // API returns PaymentsResponse object
         paymentsData = response.payments;
         totalPagesData = response.totalPages;
       }
-      
-      if (reset) {
-        setPayments(paymentsData);
-      } else {
-        setPayments(prev => [...prev, ...paymentsData]);
-      }
-      
+      // Always replace payments on fetch to avoid duplicates
+      setPayments(paymentsData);
       setHasMore(pageNum < totalPagesData);
     } catch (error: any) {
       console.error('❌ Error fetching transactions:', error);

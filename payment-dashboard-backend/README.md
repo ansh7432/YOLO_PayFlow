@@ -80,7 +80,7 @@ Login with username and password
 ```json
 {
   "username": "admin",
-  "password": "admin123"
+  "password": "123456"
 }
 ```
 
@@ -157,7 +157,7 @@ Delete user (admin only)
 
 The application creates a default admin user on first run:
 - **Username**: `admin`
-- **Password**: `admin123`
+- **Password**: `123456`
 - **Email**: `admin@paymentdashboard.com`
 - **Role**: `admin`
 

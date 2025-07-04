@@ -133,7 +133,7 @@ npm start
 
 For testing and demonstration:
 - **Username**: `admin`
-- **Password**: `admin123`
+- **Password**: `123456`
 - **Role**: `admin`
 
 ## 📱 App Screenshots
@@ -191,7 +191,7 @@ For testing and demonstration:
 # Test login
 curl -X POST http://localhost:3000/auth/login \
   -H "Content-Type: application/json" \
-  -d '{"username": "admin", "password": "admin123"}'
+  -d '{"username": "admin", "password": "123456"}'
 
 # Test payments (with token)
 curl -X GET http://localhost:3000/payments \

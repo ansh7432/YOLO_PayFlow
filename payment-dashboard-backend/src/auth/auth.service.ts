@@ -94,7 +94,7 @@ export class AuthService {
   async createDefaultUser() {
     let adminUser = await this.userModel.findOne({ username: 'admin' }).exec();
     if (!adminUser) {
-      const hashedPassword = await this.hashPassword('admin123');
+      const hashedPassword = await this.hashPassword('123456');
       const defaultUser = new this.userModel({
         username: 'admin',
         email: 'admin@paymentdashboard.com',
@@ -102,7 +102,7 @@ export class AuthService {
         role: 'admin',
       });
       adminUser = await defaultUser.save();
-      console.log('Default admin user created: admin/admin123');
+      console.log('Default admin user created: admin/123456');
     }
     return adminUser;
   }

@@ -21,7 +21,6 @@ async function bootstrap() {
     const port = configService.get('PORT') || 3000;
     await app.listen(port);
     console.log(`🚀 PayFlow API is running on: http://localhost:${port}`);
-    console.log(`📋 Default admin credentials: admin / admin123`);
 }
 bootstrap();
 //# sourceMappingURL=main.js.map

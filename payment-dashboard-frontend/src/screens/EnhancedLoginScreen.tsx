@@ -320,11 +320,11 @@ export default function EnhancedLoginScreen({ navigation, onLogin }: Props) {
                 <Text style={styles.demoTitle}>Demo Credentials</Text>
                 <View style={styles.demoRow}>
                   <Text style={styles.demoLabel}>Admin:</Text>
-                  <Text style={styles.demoValue}>admin / admin123</Text>
+                  <Text style={styles.demoValue}>admin / 123456</Text>
                 </View>
                 <TouchableOpacity
                   onPress={() => {
-                    setFormData(prev => ({ ...prev, username: 'admin', password: 'admin123' }));
+                    setFormData(prev => ({ ...prev, username: 'admin', password: '123456' }));
                   }}
                   style={styles.demoButton}
                 >
