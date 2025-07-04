@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { Payment } from '../types';
+import { Payment } from '../types/index';
 
 interface Props {
   payment: Payment;

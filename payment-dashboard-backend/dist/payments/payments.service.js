@@ -39,7 +39,7 @@ let PaymentsService = class PaymentsService {
     }
     async findAll(page = 1, limit = 10, status, method, startDate, endDate, userId, userRole) {
         const query = {};
-        if (userRole !== 'admin' && userId) {
+        if (userId) {
             query.userId = userId;
         }
         if (status)
@@ -75,6 +75,9 @@ let PaymentsService = class PaymentsService {
         const startOfWeek = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
         const baseQuery = {};
         if (userRole !== 'admin' && userId) {
+            baseQuery.userId = userId;
+        }
+        if (userId) {
             baseQuery.userId = userId;
         }
         const [totalPaymentsToday, totalPaymentsWeek, totalRevenueToday, totalRevenueWeek, failedTransactions, recentPayments, paymentsByStatus, revenueByDay,] = await Promise.all([
@@ -135,7 +138,7 @@ let PaymentsService = class PaymentsService {
     }
     async exportToCsv(status, method, startDate, endDate, userId, userRole, res) {
         const query = {};
-        if (userRole !== 'admin' && userId) {
+        if (userId) {
             query.userId = userId;
         }
         if (status)

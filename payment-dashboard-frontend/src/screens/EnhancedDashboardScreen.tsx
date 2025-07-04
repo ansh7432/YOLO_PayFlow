@@ -214,6 +214,16 @@ export default function EnhancedDashboardScreen({ navigation }: any) {
     },
   };
 
+  // Filter recentPayments to only show those belonging to the current user (by userId)
+  const getFilteredRecentPayments = () => {
+    if (!stats?.recentPayments || !user) return [];
+    // If Payment has userId, filter by user._id
+    return stats.recentPayments.filter((payment: any) => {
+      // Some payments may not have userId if old, fallback to receiver match
+      return payment.userId === user._id || payment.receiver === user.username;
+    });
+  };
+
   if (loading) {
     return (
       <LinearGradient
@@ -379,6 +389,32 @@ export default function EnhancedDashboardScreen({ navigation }: any) {
             )}
           </GradientCard>
         </Animatable.View>
+
+        {/* Recent Payments List (if present) */}
+        {getFilteredRecentPayments().length > 0 && (
+          <Animatable.View 
+            animation="fadeInUp" 
+            duration={800}
+            delay={800}
+            style={{ marginHorizontal: theme.spacing.lg, marginBottom: theme.spacing.lg }}
+          >
+            <GradientCard>
+              <Text style={{ fontWeight: 'bold', fontSize: 16, marginBottom: 8 }}>
+                Recent Payments
+              </Text>
+              {getFilteredRecentPayments().map((payment, idx) => (
+                <View key={payment._id || idx} style={{ marginBottom: 8 }}>
+                  <Text style={{ fontSize: 14, color: '#333' }}>
+                    {payment.receiver} - ₹{payment.amount} ({payment.status})
+                  </Text>
+                  <Text style={{ fontSize: 12, color: '#999' }}>
+                    {new Date(payment.createdAt).toLocaleString()}
+                  </Text>
+                </View>
+              ))}
+            </GradientCard>
+          </Animatable.View>
+        )}
 
         {/* Quick Actions */}
         <Animatable.View 

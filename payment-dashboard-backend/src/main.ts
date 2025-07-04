@@ -2,8 +2,6 @@ import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { AppModule } from './app.module';
-import { AuthService } from './auth/auth.service';
-import { PaymentsService } from './payments/payments.service';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -22,13 +20,6 @@ async function bootstrap() {
     forbidNonWhitelisted: true,
     transform: true,
   }));
-
-  // Initialize sample data
-  const authService = app.get(AuthService);
-  const paymentsService = app.get(PaymentsService);
-  
-  const adminUser = await authService.createDefaultUser();
-  await paymentsService.seedSampleData(adminUser._id.toString());
 
   const configService = app.get(ConfigService);
   const port = configService.get('PORT') || 3000;

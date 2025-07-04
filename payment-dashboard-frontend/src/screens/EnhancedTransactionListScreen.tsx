@@ -627,7 +627,9 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.background,
     borderTopLeftRadius: theme.borderRadius.xl,
     borderTopRightRadius: theme.borderRadius.xl,
-    maxHeight: '80%',
+    maxHeight: '90%', // increased from 80% to 90%
+    minHeight: 350,   // ensure a minimum height for better visibility
+    paddingBottom: theme.spacing.xl, // add extra padding at the bottom
   },
   modalHeader: {
     flexDirection: 'row',

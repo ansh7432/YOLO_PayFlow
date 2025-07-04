@@ -5,7 +5,7 @@ const { width, height } = Dimensions.get('window');
 
 export const theme = {
   colors: {
-    // Primary gradient colors
+    // Primary gradient colors (light theme)
     primary: {
       start: '#667eea',
       middle: '#764ba2',
@@ -27,11 +27,11 @@ export const theme = {
       start: '#ff416c',
       end: '#ff4b2b',
     },
-    
-    // Neutral colors
+    // Neutral colors (light)
     background: '#f8fafc',
     surface: '#ffffff',
     card: '#ffffff',
+    modal: '#ffffff',
     text: {
       primary: '#1e293b',
       secondary: '#64748b',
@@ -40,14 +40,12 @@ export const theme = {
     },
     border: '#e2e8f0',
     shadow: 'rgba(0, 0, 0, 0.1)',
-    
     // Status colors
     status: {
       success: '#10b981',
       pending: '#f59e0b',
       failed: '#ef4444',
     },
-    
     // Payment method colors
     methods: {
       credit_card: '#667eea',
@@ -57,7 +55,6 @@ export const theme = {
       crypto: '#f59e0b',
     },
   },
-  
   gradients: {
     primary: ['#667eea', '#764ba2'],
     secondary: ['#4facfe', '#00f2fe'],
@@ -67,7 +64,6 @@ export const theme = {
     card: ['#ffffff', '#f8fafc'],
     dashboard: ['#667eea', '#764ba2', '#f093fb'],
   },
-  
   spacing: {
     xs: 4,
     sm: 8,
@@ -76,7 +72,6 @@ export const theme = {
     xl: 32,
     xxl: 48,
   },
-  
   borderRadius: {
     sm: 8,
     md: 12,
@@ -85,7 +80,6 @@ export const theme = {
     xxl: 32,
     full: 9999,
   },
-  
   typography: {
     h1: {
       fontSize: 32,
@@ -113,7 +107,6 @@ export const theme = {
       lineHeight: 20,
     },
   },
-  
   shadows: {
     sm: {
       shadowColor: '#000',
@@ -144,7 +137,6 @@ export const theme = {
       elevation: 12,
     },
   },
-  
   animations: {
     timing: {
       fast: 200,
@@ -158,12 +150,17 @@ export const theme = {
       easeInOut: 'ease-in-out',
     },
   },
-  
   dimensions: {
     screen: { width, height },
     isSmallScreen: width < 375,
     isMediumScreen: width >= 375 && width < 768,
     isLargeScreen: width >= 768,
+  },
+  glass: {
+    // Glassmorphism helpers (reset to light, but can be ignored in light mode)
+    backgroundColor: '#ffffff',
+    borderColor: '#e2e8f0',
+    blur: 0,
   },
 };
 

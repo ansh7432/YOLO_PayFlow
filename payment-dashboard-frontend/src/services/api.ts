@@ -15,6 +15,9 @@ const getApiBaseUrl = () => {
   
   // For Android emulator - try these in order if connection fails:
   // 1. localhost (requires: adb reverse tcp:3000 tcp:3000)
+    if (Platform.OS === 'android') {
+    return 'http://10.0.2.2:3000';
+  }
   return 'http://localhost:3000';
   
   // If localhost doesn't work, try these alternatives:

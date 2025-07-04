@@ -44,8 +44,8 @@ export class PaymentsService {
   ): Promise<{ payments: Payment[]; total: number; totalPages: number }> {
     const query: any = {};
     
-    // If user is not admin, only show their own transactions
-    if (userRole !== 'admin' && userId) {
+    // Always filter by userId for all users (including admins)
+    if (userId) {
       query.userId = userId;
     }
     
@@ -85,6 +85,11 @@ export class PaymentsService {
     // Base query - filter by user if not admin
     const baseQuery: any = {};
     if (userRole !== 'admin' && userId) {
+      baseQuery.userId = userId;
+    }
+
+    // Always filter by userId for all users (including admins)
+    if (userId) {
       baseQuery.userId = userId;
     }
 
@@ -166,8 +171,8 @@ export class PaymentsService {
   ): Promise<void> {
     const query: any = {};
     
-    // If user is not admin, only export their own transactions
-    if (userRole !== 'admin' && userId) {
+    // Always filter by userId for all users (including admins)
+    if (userId) {
       query.userId = userId;
     }
     

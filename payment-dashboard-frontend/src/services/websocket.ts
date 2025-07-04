@@ -1,5 +1,6 @@
 import { io, Socket } from 'socket.io-client';
 import { authUtils } from '../utils/auth';
+import { Platform } from 'react-native';
 
 class WebSocketService {
   private socket: Socket | null = null;
@@ -18,7 +19,17 @@ class WebSocketService {
 
       console.log('🔌 Connecting with token:', token.substring(0, 20) + '...');
 
-      const serverUrl = process.env.EXPO_PUBLIC_API_URL || 'http://localhost:3000';
+      // Use correct server URL for platform
+      let serverUrl = process.env.EXPO_PUBLIC_API_URL;
+      if (!serverUrl) {
+        if (Platform.OS === 'web') {
+          serverUrl = 'http://localhost:3000';
+        } else if (Platform.OS === 'android') {
+          serverUrl = 'http://10.0.2.2:3000';
+        } else {
+          serverUrl = 'http://localhost:3000';
+        }
+      }
       
       this.socket = io(serverUrl, {
         auth: {
