@@ -2,6 +2,19 @@
 
 A full-stack payment management dashboard with role-based access, real-time updates, and modern UI, built with NestJS (backend) and React Native (frontend, Expo compatible).
 
+# Expo APK :
+
+Direct Link to download the app on your device - https://expo.dev/accounts/ansh_743/projects/payflow/builds/919a1a2a-5de3-44ec-b33d-028d4635a663
+
+
+# Screenshots
+
+![image](https://github.com/user-attachments/assets/d7f93c61-5a9c-45fc-b2c4-437b49e26d61)
+
+# Assignment Walkthrough
+
+https://www.loom.com/share/4df4b83af815413f8199e6a7b343603e?sid=d609936d-8f8e-468f-a57f-d7a498c9cc98
+
 ---
 
 ## Features
@@ -37,7 +50,7 @@ A full-stack payment management dashboard with role-based access, real-time upda
 
 ### 1. Clone the Repository
 ```sh
-git clone <your-repo-url>
+git clone (https://github.com/ansh7432/YOLO_PayFlow)
 cd YOLO
 ```
 
@@ -104,11 +117,4 @@ cd YOLO
 
 ---
 
-## Credits
-- Developed by Ishaan743 and team
-- Assignment for Payment Management Dashboard
 
----
-
-## License
-MIT
