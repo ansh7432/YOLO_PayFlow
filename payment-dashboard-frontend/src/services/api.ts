@@ -9,20 +9,17 @@ import { Platform } from 'react-native';
 // Option 2: 10.0.2.2 (Android emulator special IP)
 // Option 3: Computer's actual IP address
 const getApiBaseUrl = () => {
+  // Use environment variable if set
+  if (process.env.EXPO_PUBLIC_API_URL) {
+    return process.env.EXPO_PUBLIC_API_URL;
+  }
   if (Platform.OS === 'web') {
     return 'http://localhost:3000';
   }
-  
-  // For Android emulator - try these in order if connection fails:
-  // 1. localhost (requires: adb reverse tcp:3000 tcp:3000)
-    if (Platform.OS === 'android') {
+  if (Platform.OS === 'android') {
     return 'http://10.0.2.2:3000';
   }
   return 'http://localhost:3000';
-  
-  // If localhost doesn't work, try these alternatives:
-  // return 'http://10.0.2.2:3000';  // Android emulator special IP
-  // return 'http://192.168.182.113:3000';  // Your computer's IP
 };
 
 const API_BASE_URL = getApiBaseUrl();
